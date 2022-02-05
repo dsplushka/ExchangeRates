@@ -13,12 +13,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,19 +38,23 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progressBar.setVisibility(View.INVISIBLE);
-                        JSONObject object = null;
-                        ArrayList<JSONObject> list = new ArrayList<>();
                         ArrayList<Currency> listItems = new ArrayList<>();
                         try {
-                            object = new JSONObject(response);
+                            JSONObject object = new JSONObject(response);
                             JSONObject valute = object.getJSONObject("Valute");
-                            Set<Object> valutes = (Set<Object>) valute;
+
                             JSONObject aud = valute.getJSONObject("AUD");
-                            String charCode = aud.getString("CharCode");
-                            String value = aud.getString("Value");
-                            Currency rate = new Currency(charCode, value);
-                            listItems.add(rate);
-                            ListAdapter adapter = new ListViewAdapter(getApplicationContext(),R.layout.row,R.id.textViewName,listItems);
+                            String charCodeAUD = aud.getString("CharCode");
+                            String valueAUD = aud.getString("Value");
+                            Currency rateAUD = new Currency(charCodeAUD, valueAUD);
+                            listItems.add(rateAUD);
+
+                            JSONObject azn = valute.getJSONObject("AZN");
+                            String charCodeAZN = azn.getString("CharCode");
+                            String valueAZN = azn.getString("Value");
+                            Currency rateAZN = new Currency(charCodeAZN, valueAZN);
+                            listItems.add(rateAZN);
+                            ListAdapter adapter = new ListViewAdapter(getApplicationContext(),R.layout.row,R.id.textViewCharCode,listItems);
                             listView.setAdapter(adapter);
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -70,18 +71,5 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private ArrayList<JSONObject> getArrayListFromJSONArray(JSONArray jsonArray){
-        ArrayList<JSONObject> aList = new ArrayList< JSONObject>();
-        try {
-            if(jsonArray!= null){
-                for(int i = 0; i< jsonArray.length();i++){
-                    aList.add(jsonArray.getJSONObject(i));
-                }
-            }
-        }catch (JSONException js){
-            js.printStackTrace();
-        }
-        return aList;
-    }
 
 }

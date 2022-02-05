@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">0203 Exchange Rates</string>
-    <string name="name">Name</string>
-    <string name="email">Email</string>
+    <string name="app_name">Exchange Rates</string>
+    <string name="charcode">CharCode</string>
+    <string name="value">Value</string>
 </resources>

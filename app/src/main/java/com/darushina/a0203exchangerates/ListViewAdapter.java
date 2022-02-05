@@ -25,8 +25,8 @@ public class ListViewAdapter extends ArrayAdapter<Currency> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View listViewItem = inflater.inflate(listLayout, null, false);
-        TextView name = listViewItem.findViewById(R.id.textViewName);
-        TextView email = listViewItem.findViewById(R.id.textViewEmail);
+        TextView name = listViewItem.findViewById(R.id.textViewCharCode);
+        TextView email = listViewItem.findViewById(R.id.textViewValue);
         name.setText(ratesList.get(position).getCharCode());
         email.setText(ratesList.get(position).getValue());
         return listViewItem;
