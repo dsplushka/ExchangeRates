@@ -31,5 +31,4 @@ public class ListViewAdapter extends ArrayAdapter<Currency> {
         email.setText(ratesList.get(position).getValue());
         return listViewItem;
     }
-
 }
