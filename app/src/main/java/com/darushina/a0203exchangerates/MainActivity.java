@@ -2,6 +2,7 @@ package com.darushina.a0203exchangerates;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -27,18 +28,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.listView);
-        init();
-    }
-
-    private void init() {
-        Runnable runnable = new Runnable() {
+        loadJSONFromURL(JSON_URL);
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
+            public void onClick(View v) {
                 loadJSONFromURL(JSON_URL);
             }
-        };
-        Thread secThread = new Thread(runnable);
-        secThread.start();
+        });
     }
 
     private void loadJSONFromURL(String url){
